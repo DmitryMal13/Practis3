@@ -25,15 +25,26 @@ import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
-  templateUrl: './app.html',
-  styleUrl: './app.css'
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
-  title = 'hello';
-}
-export class App {
-  protected readonly title = signal('counter-app');
+  items = [
+    { id: 1, name: 'Объект 1', date: new Date(2025, 6, 11) },
+    { id: 2, name: 'Объект 2', date: new Date(2025, 6, 12) },
+    { id: 3, name: 'Объект 3', date: new Date(2025, 6, 13) },
+  ];
+
+  currentNumber = 10; // число для кастомного pipe
 }
 
+import { Pipe, PipeTransform } from '@angular/core';
 
+@Pipe({
+  name: 'addFive'
+})
+export class AddFivePipe implements PipeTransform {
+  transform(value: number): number {
+    return value + 5;
+  }
+}
